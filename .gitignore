@@ -1,0 +1,27 @@
+# Go
+backend/*.exe
+backend/*.test
+backend/vendor/
+backend/*.out
+
+# Node.js / React (PC Frontend)
+frontend-pc/node_modules/
+frontend-pc/dist/
+frontend-pc/build/
+frontend-pc/coverage/
+frontend-pc/*.log
+frontend-pc/.env*
+
+# WeChat Mini Program
+frontend-mobile/node_modules/
+frontend-mobile/miniprogram_npm/
+frontend-mobile/.DS_Store
+frontend-mobile/unpackage/
+
+# Universal
+.DS_Store
+Thumbs.db
+*.tmp
+*.swp
+.vscode/
+.idea/

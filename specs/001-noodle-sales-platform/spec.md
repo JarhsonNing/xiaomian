@@ -48,15 +48,25 @@ As a worker, I want to adjust product prices on-the-fly during ordering, and hav
 **Acceptance Scenarios**:
 
 1. **Given** a product added to the cart, **When** I tap it to change the price and confirm, **Then** the current order total updates.
-2. **Given** a completed order where the price was changed, **When** I view the order later, **Then** it reflects the price at that time, and the next order for that customer defaults to the new price. [NEEDS CLARIFICATION: Does "updating to newest price" mean updating the permanent customer mapping or just suggesting it for next time?]
+2. **Given** a completed order where the price was changed, **When** I view the order later, **Then** it reflects the price at that time, and the system **automatically updates the permanent price mapping** for that customer so the next order defaults to the new price.
 
 ---
 
+## Clarifications
+
+### Session 2026-03-03
+
+- Q: 在下单页面修改价格并确认后，系统应该如何处理这个“最新价格”？ → A: 自动更新：永久修改该客户对应此商品的定价映射，后续订单默认使用此新价格。
+- Q: 如果在下单确认时蓝牙打印机未连接或打印失败，系统应如何处理？ → A: 延后重试：先保存订单，打印失败则在订单详情或提示中点击“重新打印”。
+- Q: 当 PC 端修改商品价格或客户映射时，正在使用小程序下单的工作人员应如何感知？ → A: 实时查询：每次在小程序选择客户时，都向服务器查询该客户当前最新的商品价格。
+- Q: 当多个商品具有相同的拼音缩写（如“牛肉面”和“牛肉末”都是 NRM）时，搜索结果应如何展示？ → A: 列表点选：展示所有匹配的商品列表，用户点击其中一项进入详情或加入购物车。
+- Q: 为了兼容“大字体设计”，系统应如何处理 UI 的缩放？ → A: 自适应系统：UI 默认大按钮大间距，且能够响应微信或系统的字体缩放设置。
+
 ## Edge Cases
 
-- **Connectivity**: How does the Mini Program handle ordering when the Bluetooth printer is disconnected or out of paper?
-- **Sync Conflict**: What happens if a price is updated on the PC while an order is being placed on the Mini Program?
-- **Pinyin Collision**: How does the system handle multiple products with the same Pinyin abbreviation?
+- **Connectivity**: If the Bluetooth printer is disconnected or out of paper, the system MUST save the order successfully and prompt the user with a "Print Failed" warning. A "Re-print" button must be available in the order details or confirmation screen.
+- **Sync Conflict**: The Mini Program MUST fetch the latest customer-specific pricing at the moment of customer selection to minimize stale price risks. If a price is updated on the PC while an order is in progress, the order will use the price fetched at selection unless manually updated.
+- **Pinyin Collision**: When a search query matches multiple products' Pinyin or Name/Alias, the Mini Program MUST display a selection list containing all candidates. The user must manually tap the correct item to proceed.
 
 ## Requirements
 
@@ -64,12 +74,18 @@ As a worker, I want to adjust product prices on-the-fly during ordering, and hav
 
 - **FR-001**: System MUST provide a PC interface for managing Product master data (Name, Alias, Default Price, Pinyin, Cost Price).
 - **FR-002**: System MUST allow defining Customer-Product price mappings that override default prices.
-- **FR-003**: Mini Program MUST allow searching products by Name, Alias, or Pinyin.
+- **FR-003**: Mini Program MUST allow searching products by Name, Alias, or Pinyin and MUST present a disambiguation list for multiple matches.
 - **FR-004**: Ordering system MUST automatically load customer-specific prices upon customer selection.
 - **FR-005**: System MUST support quantity selection and manual price overrides during the ordering flow.
 - **FR-006**: System MUST persist the specific price of each item at the moment of order confirmation.
-- **FR-007**: Mini Program MUST integrate with Bluetooth receipt printers (ESC/POS protocol).
+- **FR-007**: Mini Program MUST integrate with Bluetooth receipt printers (ESC/POS protocol) and provide a manual "Re-print" function for past orders.
 - **FR-008**: UI MUST support a "Large Font" mode or be designed with large, high-contrast elements by default (min 20px for labels).
+
+### Non-Functional Requirements
+
+- **NFR-001**: UI MUST be responsive to system-level font scale settings (e.g., WeChat font sizing) and remain functional at 1.5x zoom.
+- **NFR-002**: Critical touch targets (buttons, list items) MUST be at least 48x48px for accessibility.
+- **NFR-003**: Bluetooth printing SHOULD be triggered immediately upon order confirmation.
 
 ### Key Entities
 

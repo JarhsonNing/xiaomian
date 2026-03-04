@@ -1,0 +1,19 @@
+/**
+ * Global Styles for WeChat Mini Program
+ * Optimized for Large Font accessibility
+ */
+page {
+  font-size: 20px; /* Min label size per FR-008 */
+  line-height: 1.5;
+  color: #333;
+}
+
+.button-large {
+  padding: 15px 30px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.text-high-contrast {
+  color: #000;
+}

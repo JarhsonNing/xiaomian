@@ -1,0 +1,32 @@
+{
+  "assets": {},
+  "config": {
+    "build_asset_types": [
+      "code_assets/code"
+    ],
+    "extensions": {
+      "code_assets": {
+        "c_compiler": {
+          "ar": "D:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\Hostx64\\x64\\lib.exe",
+          "cc": "D:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\Hostx64\\x64\\cl.exe",
+          "ld": "D:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\Hostx64\\x64\\link.exe",
+          "windows": {
+            "developer_command_prompt": {
+              "arguments": [],
+              "script": "D:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Auxiliary\\Build\\vcvars64.bat"
+            }
+          }
+        },
+        "link_mode_preference": "dynamic",
+        "target_architecture": "x64",
+        "target_os": "windows"
+      }
+    },
+    "linking_enabled": false
+  },
+  "out_dir_shared": "E:\\study\\xiaomian\\mobile\\.dart_tool\\hooks_runner\\shared\\sqlite3\\build\\",
+  "out_file": "E:\\study\\xiaomian\\mobile\\.dart_tool\\hooks_runner\\sqlite3\\c1a1e895a9\\output.json",
+  "package_name": "sqlite3",
+  "package_root": "C:\\Users\\DELL\\AppData\\Local\\Pub\\Cache\\hosted\\pub.dev\\sqlite3-3.1.6\\",
+  "user_defines": {}
+}
