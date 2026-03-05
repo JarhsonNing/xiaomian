@@ -12,7 +12,7 @@ import (
 
 func TestOrderCreationContract(t *testing.T) {
 	gin.SetMode(gin.TestMode)
-	r := api.SetupRouter()
+	r := api.SetupRouter(nil)
 
 	body := []byte(`{"customer_id": 1, "items": [{"product_id": 1, "quantity": 2, "final_price": 12.0}]}`)
 	req, _ := http.NewRequest("POST", "/v1/orders/", bytes.NewBuffer(body))

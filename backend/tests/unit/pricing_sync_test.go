@@ -2,8 +2,6 @@ package unit
 
 import (
 	"testing"
-	"xiaomian/backend/src/models"
-	"xiaomian/backend/src/services"
 )
 
 func TestAtomicPriceUpdate(t *testing.T) {
